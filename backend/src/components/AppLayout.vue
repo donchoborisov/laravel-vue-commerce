@@ -1,25 +1,30 @@
  <template>
-   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-       
-        Part of the layout    
-    
-      </div>
-  
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+   <div class="flex min-h-full bg-gray-200">
 
-        
-      <router-view></router-view>
-  
-        
+
+      <Sidebar/>
+
+      <div class="flex-1">
+      <TopHeader/>
+
+       <!-- content -->
+       <main class="p-6" >
+
+
+            <router-view></router-view>
+
+
+       </main>
+       <!-- end content -->
+
       </div>
     </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import Sidebar from './Sidebar.vue'
+import TopHeader from './TopHeader.vue';
 
-}
 </script>
 
 <style>
