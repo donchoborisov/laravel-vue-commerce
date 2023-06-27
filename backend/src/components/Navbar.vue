@@ -1,14 +1,14 @@
 <template>
 
-    <header class="flex justify-between items-center h-14 shadow bg-white">
-       <button class="p-4 text-gray-700">
+    <header class="flex justify-between items-center p-3 h-14 shadow bg-white">
+       <button @click="emit('toggle-sidebar')" class="flex items-center justify-center transition-colors rounded w-8 h-8 text-gray-700 hover:bg-black/10">
          <MenuIcon class="w-6"/>
        </button>
-       <div class="px-4">
+
 
 
         <Menu as="div" class="relative inline-block text-left">
-            <div>
+
               <MenuButton class="flex items-center">
                 <img src="https://randomuser.me/api/portraits/men/94.jpg" class="rounded-full w-8 mr-2">
                   <small>John Smith</small>
@@ -17,7 +17,7 @@
                   aria-hidden="true"
                 />
               </MenuButton>
-            </div>
+
 
             <transition
               enter-active-class="transition duration-100 ease-out"
@@ -68,7 +68,7 @@
           </Menu>
 
 
-       </div>
+
     </header>
 
 </template>
@@ -78,7 +78,7 @@ import {MenuIcon, LogoutIcon, UserIcon} from '@heroicons/vue/outline'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 
-
+const emit = defineEmits(['toggle-sidebar']);
 </script>
 
 <style>

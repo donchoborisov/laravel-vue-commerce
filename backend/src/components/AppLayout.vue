@@ -1,11 +1,11 @@
  <template>
-   <div class="flex min-h-full bg-gray-200">
+   <div class="flex h-full bg-gray-200">
 
 
-      <Sidebar/>
+      <Sidebar :class="{'-ml-[200px]': !sidebarOpened}"/>
 
       <div class="flex-1">
-      <TopHeader/>
+      <Navbar @toggle-sidebar="toggleSidebar"/>
 
        <!-- content -->
        <main class="p-6" >
@@ -22,8 +22,35 @@
 </template>
 
 <script setup>
-import Sidebar from './Sidebar.vue'
-import TopHeader from './TopHeader.vue';
+import { ref, onMounted, onUnmounted } from 'vue';
+import Sidebar from './Sidebar.vue';
+import Navbar from './Navbar.vue';
+
+const {title} = defineProps({
+    title:String
+})
+
+const sidebarOpened = ref(true)
+
+function toggleSidebar() {
+ sidebarOpened.value = !sidebarOpened.value
+}
+
+onMounted(() => {
+
+    handleSidebarOpened();
+    window.addEventListener('resize', handleSidebarOpened)
+})
+
+onUnmounted(() => {
+window.removeEventListener('resize', handleSidebarOpened)
+});
+
+function handleSidebarOpened() {
+
+    sidebarOpened.value = window.outerWidth > 768;
+
+}
 
 </script>
 
