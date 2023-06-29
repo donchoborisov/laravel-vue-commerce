@@ -15,7 +15,7 @@
 
         <router-link :to="{ name: 'app.products'}" class="flex items-center rounded transition-colors py-1 px-2 hover:bg-black/30 mb-2">
             <span class="mr-2 text-gray-300">
-                <ViewListIcon class="w-5" />
+                <ClipboardDocumentCheckIcon class="w-5" />
             </span>
             <span class="text-sm ">
                 Products
@@ -26,7 +26,7 @@
 
         <router-link :to="{ name: 'app.dashboard'}" class="flex items-center rounded transition-colors py-1 px-2 hover:bg-black/30 mb-2">
             <span class="mr-2 text-gray-300">
-                <ChartBarIcon class="w-5" />
+                <ListBulletIcon class="w-5" />
             </span>
             <span class="text-sm ">
                 Reports
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import {HomeIcon, UsersIcon, ViewListIcon, ChartBarIcon} from '@heroicons/vue/outline'
+import {HomeIcon, UsersIcon, ListBulletIcon, ClipboardDocumentCheckIcon} from '@heroicons/vue/24/outline'
 
 </script>
 

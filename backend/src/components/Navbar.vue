@@ -2,7 +2,7 @@
 
     <header class="flex justify-between items-center p-3 h-14 shadow bg-white">
        <button @click="emit('toggle-sidebar')" class="flex items-center justify-center transition-colors rounded w-8 h-8 text-gray-700 hover:bg-black/10">
-         <MenuIcon class="w-6"/>
+         <Bars3Icon class="w-6"/>
        </button>
 
 
@@ -47,13 +47,14 @@
                     </button>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                    <button
+                    <button 
+                    @click="logout"
                       :class="[
                         active ? 'bg-violet-500 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
                     >
-                      <LogoutIcon
+                      <ArrowRightOnRectangleIcon
                         :active="active"
                         class="mr-2 h-5 w-5 text-violet-400"
                         aria-hidden="true"
@@ -74,11 +75,22 @@
 </template>
 
 <script setup>
-import {MenuIcon, LogoutIcon, UserIcon} from '@heroicons/vue/outline'
+import {Bars3Icon, ArrowRightOnRectangleIcon, UserIcon} from '@heroicons/vue/24/outline'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { ChevronDownIcon } from '@heroicons/vue/solid'
+import { ChevronDownIcon } from '@heroicons/vue/24/solid'
+import store from "../store";
+import router from "../router";
 
 const emit = defineEmits(['toggle-sidebar']);
+
+function logout() {
+  store.dispatch('logout')
+  .then(() => {
+    router.push({name:'login'})
+  })
+}
+
+
 </script>
 
 <style>

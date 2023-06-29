@@ -25,6 +25,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import Sidebar from './Sidebar.vue';
 import Navbar from './Navbar.vue';
+import store from '../store';
 
 const {title} = defineProps({
     title:String
@@ -37,6 +38,8 @@ function toggleSidebar() {
 }
 
 onMounted(() => {
+
+    store.dispatch('getUser')
 
     handleSidebarOpened();
     window.addEventListener('resize', handleSidebarOpened)
