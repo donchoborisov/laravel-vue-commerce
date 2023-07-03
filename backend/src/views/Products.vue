@@ -1,5 +1,6 @@
 <template>
   <div>
+    
   <div class="flex items-center justify-between mb-3">
     <button type="submit"
     class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none 
@@ -73,6 +74,22 @@
 
 <script setup>
 import Spinner from '../components/core/Spinner.vue';
+
+import {computed,onMounted,ref} from "vue";
+import store from '../store';
+import {PRODUCTS_PER_PAGE} from "../constants.js"
+
+const perPage = ref(PRODUCTS_PER_PAGE)
+const search = ref('')
+const products = computed(() => store.state.products)
+
+onMounted(() => {
+  getProducts();
+})
+
+function getProducts() {
+  store.dispatch('getProducts')
+}
 
 
 </script>
