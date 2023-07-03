@@ -15,7 +15,7 @@
 
         <router-link :to="{ name: 'app.products'}" class="flex items-center rounded transition-colors py-1 px-2 hover:bg-black/30 mb-2">
             <span class="mr-2 text-gray-300">
-                <ClipboardDocumentCheckIcon class="w-5" />
+                           <ClipboardDocumentCheckIcon class="w-5" />
             </span>
             <span class="text-sm ">
                 Products
@@ -54,9 +54,4 @@
 
 <script setup>
 import {HomeIcon, UsersIcon, ListBulletIcon, ClipboardDocumentCheckIcon} from '@heroicons/vue/24/outline'
-
 </script>
-
-<style>
-
-</style>
