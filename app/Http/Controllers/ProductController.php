@@ -87,8 +87,26 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $product->update($request->validated());
+          $data = $request->validated();
+          $data['updated_by'] = $request->user()->id;
 
+        /** @var \Illuminate\Http\UploadedFile $image */
+        $image = $data['image'] ?? null;
+
+        if($image) {
+            $relativePath = $this->saveImage($image);
+            $data['image'] = URL::to(Storage::url($relativePath));
+            $data['image_mime'] = $image->getClientMimeType();
+            $data['image_size'] = $image->getSize();
+            
+            if($product->image) {
+                Storage::deleteDirectory('/public/' . dirname($product->image));
+            }
+
+        }
+
+        $product->update($data);
+        
         return new ProductResource($product);
     }
 
@@ -106,15 +124,11 @@ class ProductController extends Controller
     }
 
 
-    private function saveImage(UploadedFile $image) {
+    private function saveImage(\Illuminate\Http\UploadedFile $image) {
 
-        $path = 'images/' . Str::random();
-        if(!Storage::exists($path)) {
-            Storage::makeDirectory($path, 0755, true);
-        }
-
-        if(!Storage::putFileAs('public/' . $path, $image, $image->getClientOriginalName())) {
-           throw new \Exception("Unable to save the file \" {$image->getClientOriginalName()}\"");
+        $path = 'public/images/' . Str::random();
+        if (!Storage::putFileAs($path, $image, $image->getClientOriginalName())) {
+            throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
         }
 
         return $path . '/' . $image->getClientOriginalName();
