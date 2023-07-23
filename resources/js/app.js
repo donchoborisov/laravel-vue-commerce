@@ -2,6 +2,7 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse'
+import {post} from "./http.js"
 
 
 Alpine.plugin(collapse)
@@ -55,6 +56,8 @@ document.addEventListener("alpine:init", async () => {
     return {
       product,
       addToCart(quantity = 1) {
+
+
         post(this.product.addToCartUrl, {quantity})
           .then(result => {
             this.$dispatch('cart-change', {count: result.count})

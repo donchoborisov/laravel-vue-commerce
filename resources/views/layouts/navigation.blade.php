@@ -1,6 +1,7 @@
 <header
     x-data="{
         mobileMenuOpen: false,
+        cartItemsCount:{{ \App\Helpers\Cart::getCartItemsCount() }}
 
     }"
     @cart-change.window="cartItemsCount = $event.detail.count"
@@ -17,7 +18,7 @@
         <ul>
             <li>
                 <a
-                    href=""
+                    href="{{ route('cart.index') }}"
                     class="relative flex items-center justify-between py-2 px-3 transition-colors hover:bg-slate-800"
                 >
                     <div class="flex items-center">
@@ -198,7 +199,7 @@
         <ul class="grid grid-flow-col items-center">
             <li>
                 <a
-                    href=""
+                    href="{{ route('cart.index') }}"
                     class="relative inline-flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
                 >
                     <svg
@@ -215,7 +216,7 @@
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                     </svg>
-                    Cart 1
+                    Cart 
                     <small
                         x-show="cartItemsCount"
                         x-transition
