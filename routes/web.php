@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::get('/',[ProductController::class, 'index'] )->name('home');
 Route::get('/product/{product:slug}',[ProductController::class, 'view'] )->name('product.view');
 
     Route::prefix('/cart')->name('cart.')->group(function(){
-      
+
         Route::get('/', [CartController::class, 'index'])->name('index');
         Route::post('/add/{product:slug}', [CartController::class, 'add'])->name('add');
         Route::post('/remove/{product:slug}', [CartController::class, 'remove'])->name('remove');
@@ -29,7 +30,11 @@ Route::get('/product/{product:slug}',[ProductController::class, 'view'] )->name(
 
     });
 
+Route::middleware(['auth', 'verified'])->group(function() {
 
+    Route::get('/profile', [ProfileController::class, 'view'])->name('profile');
+
+});
 
 });
 
